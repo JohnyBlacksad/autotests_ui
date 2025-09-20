@@ -88,5 +88,5 @@ class CoursesListPage(BasePage):
         self.course_burger_button.nth(index).click()
         expect(self.course_menu_del_icon.nth(index)).to_be_visible()
         expect(self.course_menu_del_text.nth(index)).to_be_visible()
-        expect(self.course_menu_del_text.nth(index)).to_have_text('Edit')
+        expect(self.course_menu_del_text.nth(index)).to_have_text('Delete')
         self.course_menu_del_button.nth(index).click()
