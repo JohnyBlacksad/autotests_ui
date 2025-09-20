@@ -41,7 +41,6 @@ class CreateCoursePage(BasePage):
         self.not_task_course_title = page.get_by_test_id('create-course-exercises-empty-view-title-text')
         self.not_task_course_descr = page.get_by_test_id('create-course-exercises-empty-view-description-text')
         
-        self.is_image_uploaded = False
         
     
     def check_title_course(self):
@@ -80,11 +79,11 @@ class CreateCoursePage(BasePage):
         
         expect(self.max_score_course_field).to_be_visible()
         expect(self.max_score_course_field.locator('label')).to_have_text('Max score')
-        expect(self.max_score_course_input).to_have_value('')
+        expect(self.max_score_course_input).to_have_value('0')
         
         expect(self.min_score_course_field).to_be_visible()
         expect(self.min_score_course_field.locator('label')).to_have_text('Min score')
-        expect(self.min_score_course_input).to_have_value('')
+        expect(self.min_score_course_input).to_have_value('0')
         
     def check_empty_task_list(self):
         expect(self.task_course_title).to_be_visible()
@@ -104,3 +103,62 @@ class CreateCoursePage(BasePage):
     def remove_course_img(self):
         self.remove_img_course_button.click()
         self.check_not_image_course_widget()
+
+
+    def fill_course_form(self, title: str,
+                         time: str,
+                         description: str,
+                         max_score: str,
+                         min_score: str):
+        
+        self.title_course_input.fill(title)
+        self.estimated_time_course_input.fill(time)
+        self.description_course_input.fill(description)
+        self.max_score_course_input.fill(max_score)
+        self.min_score_course_input.fill(min_score)
+        
+        expect(self.title_course_input).to_have_value(title)
+        expect(self.estimated_time_course_input).to_have_value(time)
+        expect(self.description_course_input).to_have_value(description)
+        expect(self.max_score_course_input).to_have_value(max_score)
+        expect(self.min_score_course_input).to_have_value(min_score)
+        expect(self.create_course_button).to_be_enabled()
+        
+        
+    def click_created_task_course(self):
+        self.task_add_course_button.click()
+        
+    def check_visible_task_form(self, index: int):
+        task_title_input = self.page.get_by_test_id(f'create-course-exercise-form-title-{index}-input').locator('input')
+        task_title_field = self.page.get_by_test_id(f'create-course-exercise-form-title-{index}-input')
+        
+        task_descr_input = self.page.get_by_test_id(f'create-course-exercise-form-description-{index}-input').locator('input')
+        task_descr_field = self.page.get_by_test_id(f'create-course-exercise-form-description-{index}-input')
+        
+        task_delete_button = self.page.get_by_test_id(f'create-course-exercise-{index}-box-toolbar-delete-exercise-button')
+        
+        expect(task_title_field).to_be_visible()
+        expect(task_title_field.locator('label')).to_have_text('Title')
+        expect(task_title_input).to_have_value('Exercise title')
+        
+        expect(task_descr_field).to_be_visible()
+        expect(task_descr_field.locator('label')).to_have_text('Description')
+        expect(task_descr_input).to_have_value('Exercise description')
+        
+        expect(task_delete_button).to_be_visible()
+        
+    def fill_task_form_course(self, title_task: str, 
+                              descr_task: str, 
+                              index: int):
+        
+        task_title_input = self.page.get_by_test_id(f'create-course-exercise-form-title-{index}-input').locator('input')
+        task_descr_input = self.page.get_by_test_id(f'create-course-exercise-form-description-{index}-input').locator('input')
+        
+        task_title_input.fill(title_task)
+        task_descr_input.fill(descr_task)
+        
+        expect(task_title_input).to_have_value(title_task)
+        expect(task_descr_input).to_have_value(descr_task)
+        
+    def click_created_course(self):
+        self.create_course_button.click()
