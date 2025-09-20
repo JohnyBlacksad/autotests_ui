@@ -1,5 +1,4 @@
 from pages.login_page import LoginPage
-from playwright.sync_api import Page
 import pytest
 
 #Переписал функцию согласно задаче, изменил способ получения локаторов и заголовок функции.
