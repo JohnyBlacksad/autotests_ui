@@ -15,21 +15,7 @@ class CreateCoursePage(BasePage):
         self.image_upload_widget = ImageUplodWidgetComponent(page, 'create-course-preview')
         
         self.page_title = page.get_by_test_id('create-course-toolbar-title-text')
-        self.create_course_button = page.get_by_test_id('create-course-toolbar-create-course-button')
-        
-        # Реализовано в COM EmptyViewComponent
-        # self.not_prev_img_course_icon = page.get_by_test_id('create-course-preview-empty-view-icon')
-        # self.not_prev_img_course_title = page.get_by_test_id('create-course-preview-empty-view-title-text')
-        # self.not_prev_img_course_descr = page.get_by_test_id('create-course-preview-empty-view-description-text')
-        
-        
-        # Перенесено в COM ImageUplodWidgetComponent
-        # self.upload_img_course_icon = page.get_by_test_id('create-course-preview-image-upload-widget-info-icon')
-        # self.upload_img_course_title = page.get_by_test_id('create-course-preview-image-upload-widget-info-title-text')
-        # self.upload_img_course_desct = page.get_by_test_id('create-course-preview-image-upload-widget-info-description-text')
-        # self.upload_img_course_button = page.get_by_test_id('create-course-preview-image-upload-widget-upload-button')
-        # self.upload_img_course_button_input = page.get_by_test_id('create-course-preview-image-upload-widget-input')
-        # self.remove_img_course_button = page.get_by_test_id('create-course-preview-image-upload-widget-remove-button')
+        self.create_course_button = page.get_by_test_id('create-course-toolbar-create-course-button')  
         
         self.title_course_field = page.get_by_test_id('create-course-form-title-input')
         self.title_course_input = page.get_by_test_id('create-course-form-title-input').locator('input')
@@ -49,12 +35,6 @@ class CreateCoursePage(BasePage):
         self.task_course_title = page.get_by_test_id('create-course-exercises-box-toolbar-title-text')
         self.task_add_course_button = page.get_by_test_id('create-course-exercises-box-toolbar-create-exercise-button')
         
-        # Реализовано в COM EmptyViewComponent
-        # self.not_task_course_icon = page.get_by_test_id('create-course-exercises-empty-view-icon')
-        # self.not_task_course_title = page.get_by_test_id('create-course-exercises-empty-view-title-text')
-        # self.not_task_course_descr = page.get_by_test_id('create-course-exercises-empty-view-description-text')
-        
-        
     
     def check_title_course(self):
         expect(self.page_title).to_be_visible()
@@ -62,30 +42,6 @@ class CreateCoursePage(BasePage):
         expect(self.create_course_button).to_be_visible()
         expect(self.create_course_button).to_be_disabled()
         
-    # Перенес в COM ImageUploadwidgetComponent
-    
-    # def check_not_image_course_widget(self):
-        
-    #     self.preview_empty_view.check_visible(
-    #         title = 'No image selected', 
-    #         description = 'Preview of selected image will be displayed here'
-    #         )
-        
-        # expect(self.not_prev_img_course_icon).to_be_visible()
-        # expect(self.not_prev_img_course_title).to_be_visible()
-        # expect(self.not_prev_img_course_title).to_have_text('No image selected')
-        # expect(self.not_prev_img_course_descr).to_be_visible()
-        # expect(self.not_prev_img_course_descr).to_have_text('Preview of selected image will be displayed here')
-    
-    # Перенес в COM ImageUploadwidgetComponent
-    
-    # def check_download_img_course_vidget(self):
-    #     expect(self.upload_img_course_icon).to_be_visible()
-    #     expect(self.upload_img_course_title).to_be_visible()
-    #     expect(self.upload_img_course_title).to_have_text('Tap on "Upload image" button to select file')
-    #     expect(self.upload_img_course_desct).to_be_visible()
-    #     expect(self.upload_img_course_desct).to_have_text('Recommended file size 540X300')
-    #     expect(self.upload_img_course_button).to_be_visible()
         
     def check_empty_form_created_course(self):
         expect(self.title_course_field).to_be_visible()
@@ -119,20 +75,6 @@ class CreateCoursePage(BasePage):
             description= 'Click on "Create exercise" button to create new exercise'
         )
         
-        # Реализовано в COM
-        # expect(self.not_task_course_icon).to_be_visible()
-        # expect(self.not_task_course_title).to_be_visible()
-        # expect(self.not_task_course_title).to_have_text('There is no exercises')
-        # expect(self.not_task_course_descr).to_be_visible()
-        # expect(self.not_task_course_descr).to_have_text('Click on "Create exercise" button to create new exercise')
-        
-        
-    # Перенес в COM ImageUploadwidgetComponent
-    
-    # def remove_course_img(self):
-    #     self.remove_img_course_button.click()
-    #     self.check_not_image_course_widget()
-
 
     def fill_course_form(self, title: str,
                          time: str,
