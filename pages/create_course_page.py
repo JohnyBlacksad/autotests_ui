@@ -1,16 +1,24 @@
 from pages.base_page import BasePage
+from components.navigation.navbar_component import NavbarComponent
+from components.views.empty_view_component import EmptyViewComponent
 from playwright.sync_api import Page, expect
 
 class CreateCoursePage(BasePage):
+    
     def __init__(self, page: Page):
         super().__init__(page)
+        
+        self.navbar = NavbarComponent(page)
+        self.preview_empty_view = EmptyViewComponent(page, 'create-course-preview')
+        self.no_task_empty_view = EmptyViewComponent(page, 'create-course-exercises')
         
         self.page_title = page.get_by_test_id('create-course-toolbar-title-text')
         self.create_course_button = page.get_by_test_id('create-course-toolbar-create-course-button')
         
-        self.not_prev_img_course_icon = page.get_by_test_id('create-course-preview-empty-view-icon')
-        self.not_prev_img_course_title = page.get_by_test_id('create-course-preview-empty-view-title-text')
-        self.not_prev_img_course_descr = page.get_by_test_id('create-course-preview-empty-view-description-text')
+        # Реализовано в COM EmptyViewComponent
+        # self.not_prev_img_course_icon = page.get_by_test_id('create-course-preview-empty-view-icon')
+        # self.not_prev_img_course_title = page.get_by_test_id('create-course-preview-empty-view-title-text')
+        # self.not_prev_img_course_descr = page.get_by_test_id('create-course-preview-empty-view-description-text')
         
         self.upload_img_course_icon = page.get_by_test_id('create-course-preview-image-upload-widget-info-icon')
         self.upload_img_course_title = page.get_by_test_id('create-course-preview-image-upload-widget-info-title-text')
@@ -37,9 +45,10 @@ class CreateCoursePage(BasePage):
         self.task_course_title = page.get_by_test_id('create-course-exercises-box-toolbar-title-text')
         self.task_add_course_button = page.get_by_test_id('create-course-exercises-box-toolbar-create-exercise-button')
         
-        self.not_task_course_icon = page.get_by_test_id('create-course-exercises-empty-view-icon')
-        self.not_task_course_title = page.get_by_test_id('create-course-exercises-empty-view-title-text')
-        self.not_task_course_descr = page.get_by_test_id('create-course-exercises-empty-view-description-text')
+        # Реализовано в COM EmptyViewComponent
+        # self.not_task_course_icon = page.get_by_test_id('create-course-exercises-empty-view-icon')
+        # self.not_task_course_title = page.get_by_test_id('create-course-exercises-empty-view-title-text')
+        # self.not_task_course_descr = page.get_by_test_id('create-course-exercises-empty-view-description-text')
         
         
     
@@ -50,11 +59,18 @@ class CreateCoursePage(BasePage):
         expect(self.create_course_button).to_be_disabled()
         
     def check_not_image_course_widget(self):
-        expect(self.not_prev_img_course_icon).to_be_visible()
-        expect(self.not_prev_img_course_title).to_be_visible()
-        expect(self.not_prev_img_course_title).to_have_text('No image selected')
-        expect(self.not_prev_img_course_descr).to_be_visible()
-        expect(self.not_prev_img_course_descr).to_have_text('Preview of selected image will be displayed here')
+        
+        self.preview_empty_view.check_visible(
+            title = 'No image selected', 
+            description = 'Preview of selected image will be displayed here'
+            )
+        
+        # Реализовано в COM
+        # expect(self.not_prev_img_course_icon).to_be_visible()
+        # expect(self.not_prev_img_course_title).to_be_visible()
+        # expect(self.not_prev_img_course_title).to_have_text('No image selected')
+        # expect(self.not_prev_img_course_descr).to_be_visible()
+        # expect(self.not_prev_img_course_descr).to_have_text('Preview of selected image will be displayed here')
     
     def check_download_img_course_vidget(self):
         expect(self.upload_img_course_icon).to_be_visible()
@@ -90,11 +106,18 @@ class CreateCoursePage(BasePage):
         expect(self.task_course_title).to_have_text('Exercises')
         expect(self.task_add_course_button).to_be_visible()
         expect(self.task_add_course_button).to_be_enabled()
-        expect(self.not_task_course_icon).to_be_visible()
-        expect(self.not_task_course_title).to_be_visible()
-        expect(self.not_task_course_title).to_have_text('There is no exercises')
-        expect(self.not_task_course_descr).to_be_visible()
-        expect(self.not_task_course_descr).to_have_text('Click on "Create exercise" button to create new exercise')
+        
+        self.no_task_empty_view.check_visible(
+            title = 'There is no exercises',
+            description= 'Click on "Create exercise" button to create new exercise'
+        )
+        
+        # Реализовано в COM
+        # expect(self.not_task_course_icon).to_be_visible()
+        # expect(self.not_task_course_title).to_be_visible()
+        # expect(self.not_task_course_title).to_have_text('There is no exercises')
+        # expect(self.not_task_course_descr).to_be_visible()
+        # expect(self.not_task_course_descr).to_have_text('Click on "Create exercise" button to create new exercise')
         
     def upload_course_img(self, file: str):
         self.upload_img_course_button_input.set_input_files(file)
