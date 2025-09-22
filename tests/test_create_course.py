@@ -33,17 +33,17 @@ def test_create_course(created_courses_page: CreateCoursePage,
                                           min_score=course_min_score)
     
     created_courses_page.click_created_task_course()
-    index = 0
+ 
     
-    created_courses_page.check_visible_task_form(index)
+    created_courses_page.check_visible_task_form(index=0)
     created_courses_page.fill_task_form_course(title_task=course_task_title,
                                                descr_task=course_task_descr,
-                                               index=index)
+                                               index=0)
     
     created_courses_page.click_created_course()
-    courses_list_page.check_visible_course_card(index=0, 
+    courses_list_page.course_view.check_visible(index=0, 
                                                 title=course_title,
                                                 max_score=course_max_score,
                                                 min_score=course_min_score,
-                                                time=course_time)
-    courses_list_page.click_del_course(index=0)
+                                                estimated_time=course_time)
+    courses_list_page.course_view.cart_menu.cilck_delete(index=0)
