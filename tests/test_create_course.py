@@ -19,12 +19,11 @@ def test_create_course(created_courses_page: CreateCoursePage,
     courses_list_page.toolbar_view.click_create_course_button()
     
     created_courses_page.check_title_course()
-    created_courses_page.check_not_image_course_widget()
-    created_courses_page.check_not_image_course_widget()
-    created_courses_page.check_download_img_course_vidget()
+    created_courses_page.image_upload_widget.check_visible(is_image_uploaded=False)
     created_courses_page.check_empty_form_created_course()
     created_courses_page.check_empty_task_list()
-    created_courses_page.upload_course_img(file='./testdata/files/image.jpg')
+    created_courses_page.image_upload_widget.upload_course_img(file='./testdata/files/image.jpg')
+    created_courses_page.image_upload_widget.check_visible(is_image_uploaded=True)
     
     created_courses_page.fill_course_form(title=course_title,
                                           time=course_time,
