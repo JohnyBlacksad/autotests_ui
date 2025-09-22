@@ -1,9 +1,10 @@
+from components.courses.courses_list_toolbar_view_component import CoursesListToolbarViewComponent
 from components.navigation.navbar_component import NavbarComponent
 from components.navigation.sidebar_component import SidebarComponent
 from components.views.empty_view_component import EmptyViewComponent
 from components.courses.course_view_component import CourseViewComponents
 from pages.base_page import BasePage
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 
 class CoursesListPage(BasePage):
@@ -13,9 +14,12 @@ class CoursesListPage(BasePage):
         self.side_bar = SidebarComponent(page)
         self.empty_view = EmptyViewComponent(page, 'courses-list')
         self.course_view = CourseViewComponents(page)
+        self.toolbar_view = CoursesListToolbarViewComponent(page)
         
-        self.page_title = page.get_by_test_id('courses-list-toolbar-title-text')
-        self.creeate_course_button = page.get_by_test_id('courses-list-toolbar-create-course-button')
+        # Перенесено в COM CoursesListToolbarComponent
+        
+        # self.page_title = page.get_by_test_id('courses-list-toolbar-title-text')
+        # self.creeate_course_button = page.get_by_test_id('courses-list-toolbar-create-course-button')
         
         # Методы и локаторы реализованы в COM EmptyViewComponent
         
@@ -47,10 +51,11 @@ class CoursesListPage(BasePage):
         # self.course_menu_del_icon = page.get_by_test_id('course-view-delete-menu-item-icon')
         # self.course_menu_del_text = page.get_by_test_id('course-view-delete-menu-item-text')
         
-        
-    def check_page_title(self):
-        expect(self.page_title).to_be_visible()
-        expect(self.page_title).to_have_text('Courses')
+    # Перенесено в СOM
+      
+    # def check_page_title(self):
+    #     expect(self.page_title).to_be_visible()
+    #     expect(self.page_title).to_have_text('Courses')
         
     def check_empty_result(self):
         title = 'There is no results'
@@ -64,12 +69,13 @@ class CoursesListPage(BasePage):
         # expect(self.empty_course_descr).to_be_visible()
         # expect(self.empty_course_descr).to_have_text('')
         # expect(self.empty_course_icon).to_be_visible()
-        
-    def check_create_course_button(self):
-        expect(self.creeate_course_button).to_be_visible()
+      
+    # Перенесено в COM   
+    # def check_create_course_button(self):
+    #     expect(self.creeate_course_button).to_be_visible()
     
-    def click_create_course(self):
-        self.creeate_course_button.click()
+    # def click_create_course(self):
+    #     self.creeate_course_button.click()
       
     # Реализовано в COM  
         

@@ -16,7 +16,7 @@ def test_create_course(created_courses_page: CreateCoursePage,
                        course_task_title: str,
                        course_task_descr: str):
     courses_list_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
-    courses_list_page.click_create_course()
+    courses_list_page.toolbar_view.click_create_course_button()
     
     created_courses_page.check_title_course()
     created_courses_page.check_not_image_course_widget()
