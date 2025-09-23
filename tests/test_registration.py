@@ -2,8 +2,9 @@ from pages.registration_page import RegistrationPage
 from pages.dashboard_page import DashboardPage
 import pytest
 
+@pytest.mark.regression
 @pytest.mark.parametrize('email, username, password', 
-                         [('user.name@gmail.com', 'username', 'password')])
+                         [('test.name@gmail.com', 'testername', 'password')])
 def test_succesful_registration(registration_page: RegistrationPage,
                                 dashboard_page: DashboardPage, 
                                 email: str, 
@@ -18,4 +19,4 @@ def test_succesful_registration(registration_page: RegistrationPage,
                                              password=password)
     
     registration_page.click_reg_button()
-    dashboard_page.check_page_title()
+    dashboard_page.toolbar.check_visible()
