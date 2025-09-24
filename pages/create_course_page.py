@@ -22,8 +22,6 @@ class CreateCoursePage(BasePage):
         self.course_exercise_form = CreateCourseExerciseFormComponent(page)
         self.course_form = CreateCourseFormComponent(page)
         
-        self.task_delete_button = page.get_by_test_id('create-course-exercise-0-box-toolbar-delete-exercise-button')
-        
     def check_empty_task_list(self):
         self.exercises_toolbar.check_visible()
         self.no_task_empty_view.check_visible(
