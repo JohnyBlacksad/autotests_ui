@@ -4,6 +4,7 @@ from elements.text import Text
 from elements.button import Button
 from elements.link import Link
 from playwright.sync_api import Page
+import re
 
 class RegistrationPage(BasePage):
     def __init__(self, page: Page):
@@ -28,6 +29,7 @@ class RegistrationPage(BasePage):
         
     def click_login_link(self) -> None:
         self.login_link.click()
+        self.check_current_url(re.compile(r'*/#/auth/login'))
         
     def check_title(self) -> None:
         self.title.check_visible()

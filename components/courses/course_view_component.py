@@ -1,21 +1,25 @@
 from components.base_component import BaseComponent
 from components.courses.course_view_menu_component import CourseViewMenuComponent
-from playwright.sync_api import Page, expect
+from elements.text import Text
+from elements.image import Image
+from elements.icon import Icon
+from playwright.sync_api import Page
 
 class CourseViewComponents(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
         self.cart_menu = CourseViewMenuComponent(page)
         
-        self.title = page.get_by_test_id('course-widget-title-text')
-        self.img = page.get_by_test_id('course-preview-image')
-        self.max_score_text = page.get_by_test_id('course-max-score-info-row-view-text')
-        self.min_score_text = page.get_by_test_id('course-min-score-info-row-view-text')
-        self.estimated_time_text = page.get_by_test_id('course-estimated-time-info-row-view-text')
+        self.img = Image(page, 'course-preview-image', 'Preview course card image')
         
-        self.max_score_icon = page.get_by_test_id('course-max-score-info-row-view-icon')
-        self.min_score_icon = page.get_by_test_id('course-min-score-info-row-view-icon')
-        self.estimated_time_icon = page.get_by_test_id('course-estimated-time-info-row-view-icon')
+        self.title = Text(page, 'course-widget-title-text', 'Title')
+        self.max_score_text = Text(page, 'course-max-score-info-row-view-text', 'Max score')
+        self.min_score_text = Text(page, 'course-min-score-info-row-view-text', 'Min score')
+        self.estimated_time_text = Text(page, 'course-estimated-time-info-row-view-text', 'Estomated time')
+        
+        self.max_score_icon = Icon(page, 'course-max-score-info-row-view-icon', 'Max score icon')
+        self.min_score_icon = Icon(page, 'course-min-score-info-row-view-icon', 'Min score icon')
+        self.estimated_time_icon = Icon(page, 'course-estimated-time-info-row-view-icon', 'Estimated time icon')
         
     def check_visible(
                 self, 
@@ -26,13 +30,23 @@ class CourseViewComponents(BaseComponent):
                 estimated_time: str
             ):
         
-        expect(self.cart_menu.menu_button.nth(index)).to_be_visible()
-        expect(self.title.nth(index)).to_be_visible()
-        expect(self.title.nth(index)).to_have_text(title)
-        expect(self.img.nth(index)).to_be_visible()
-        expect(self.max_score_icon.nth(index)).to_be_visible()
-        expect(self.max_score_text.nth(index)).to_have_text(f'Max score: {max_score}')
-        expect(self.min_score_icon.nth(index)).to_be_visible()
-        expect(self.min_score_text.nth(index)).to_have_text(f'Min score: {min_score}')
-        expect(self.estimated_time_icon.nth(index)).to_be_visible()
-        expect(self.estimated_time_text.nth(index)).to_have_text(f'Estimated time: {estimated_time}')
+        self.cart_menu.menu_button.check_visible(nth=index)
+        
+        self.title.check_visible(nth=index)
+        self.title.check_have_text(title, nth=index)
+        
+        self.img.check_visible(nth=index)
+        
+        self.max_score_icon.check_visible(nth=index)
+        self.max_score_text.check_visible(nth=index)
+        self.max_score_text.check_have_text(f'Max score: {max_score}', nth=index)
+        
+        self.min_score_icon.check_visible(nth=index)
+        self.min_score_text.check_visible(nth=index)
+        self.min_score_text.check_have_text(f'Min score: {min_score}', nth=index)
+        
+        self.estimated_time_icon.check_visible(nth=index)
+        self.estimated_time_text.check_visible(nth=index)
+        self.estimated_time_text.check_have_text(f'Estimated time: {estimated_time}', nth=index)
+        
+        

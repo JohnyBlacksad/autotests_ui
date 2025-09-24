@@ -1,29 +1,33 @@
 from components.base_component import BaseComponent
-from playwright.sync_api import Page, expect
-
+from elements.button import Button
+from elements.icon import Icon
+from elements.text import Text
+from playwright.sync_api import Page
 class CourseViewMenuComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
         
-        self.menu_button = page.get_by_test_id('course-view-menu-button')
-        self.edit_button = page.get_by_test_id('course-view-edit-menu-item')
-        self.delete_button = page.get_by_test_id('course-view-delete-menu-item')
+        self.menu_button = Button(page, 'course-view-menu-button', 'Cart menu button')
+        self.edit_button = Button(page, 'course-view-edit-menu-item', 'Edit cart button')
+        self.delete_button = Button(page, 'course-view-delete-menu-item', 'Delete cart button')
         
-        self.edit_button_icon = page.get_by_test_id('course-view-edit-menu-item-icon')
-        self.delete_button_icon = page.get_by_test_id('course-view-delete-menu-item-icon')
+        self.edit_button_icon = Icon(page, 'course-view-edit-menu-item-icon', 'Edit button icon')
+        self.delete_button_icon = Icon(page, 'course-view-delete-menu-item-icon', 'Delete button icon')
         
-        self.edit_button_text = page.get_by_test_id('course-view-edit-menu-item-text')
-        self.delete_button_text = page.get_by_test_id('course-view-delete-menu-item-text')
+        self.edit_button_text = Text(page, 'course-view-edit-menu-item-text', 'Edit button text')
+        self.delete_button_text = Text(page, 'course-view-delete-menu-item-text', 'Delete button text')
         
     def click_edit(self, index: int):
-        self.menu_button.nth(index).click()
-        expect(self.edit_button_icon.nth(index)).to_be_visible()
-        expect(self.edit_button_text.nth(index)).to_have_text('Edit')
-        self.edit_button.nth(index).click()
+        self.menu_button.check_visible(nth=index)
+        self.menu_button.click(nth=index)
+        self.edit_button_icon.check_visible(nth=index)
+        self.edit_button_text.check_have_text('Edit', nth=index)
+        self.edit_button.click(nth=index)
         
     def cilck_delete(self, index: int):
-        self.menu_button.nth(index).click()
-        expect(self.delete_button_icon.nth(index)).to_be_visible()
-        expect(self.delete_button_text.nth(index)).to_have_text('Delete')
-        self.delete_button.nth(index).click()
-        
+        self.menu_button.check_visible(nth=index)
+        self.menu_button.click(nth=index)
+        self.delete_button.check_visible(nth=index)
+        self.delete_button_icon.check_visible(nth=index)
+        self.delete_button_text.check_have_text('Delete', nth=index)
+        self.delete_button.click(nth=index)

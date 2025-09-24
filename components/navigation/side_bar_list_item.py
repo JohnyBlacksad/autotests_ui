@@ -20,4 +20,4 @@ class SideBarListItemComponents(BaseComponent):
         
     def navigate(self, url: Pattern[str]):
         self.button.click()
-        self.check_current_url()
+        self.check_current_url(url)
