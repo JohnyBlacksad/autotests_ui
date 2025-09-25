@@ -1,12 +1,23 @@
 from pages.courses.create_course_page import CreateCoursePage
 from pages.courses.courses_list import CoursesListPage
 import pytest
+import allure
 import re
-
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStory
+from tools.allure.tags import AllureTag
+from allure_commons.types import Severity
 
 @pytest.mark.course
 @pytest.mark.regression
+@allure.tag(AllureTag.REGRESSION, AllureTag.COURSES)
+@allure.epic(AllureEpic.LMS)
+@allure.feature(AllureFeature.COURSES)
+@allure.story(AllureStory.COURSES)
 class TestCourses:
+    @allure.title('Check displaying of empty courses list')
+    @allure.severity(Severity.NORMAL)
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):
         
         courses_list_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
@@ -19,6 +30,8 @@ class TestCourses:
 
     @pytest.mark.parametrize('course_title, course_time, course_descr, course_max_score, course_min_score, course_task_title, course_task_descr', 
                             [('Playwright', '2 weeks', 'Playwright', '100', '10', 'Task 1', 'This is task 1')])
+    @allure.title('Create with course')
+    @allure.severity(Severity.CRITICAL)
     def test_create_course(self, created_courses_page: CreateCoursePage, 
                         courses_list_page: CoursesListPage,
                         course_title: str, 
@@ -67,6 +80,8 @@ class TestCourses:
         
         courses_list_page.course_view.cart_menu.cilck_delete(index=0)
     
+    @allure.title('Create and edit created course')
+    @allure.severity(Severity.NORMAL)
     def test_edit_course(self, created_courses_page: CreateCoursePage,  courses_list_page: CoursesListPage):
        
         created_courses_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
