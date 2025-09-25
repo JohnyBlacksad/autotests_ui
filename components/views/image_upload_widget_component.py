@@ -6,6 +6,7 @@ from elements.text import Text
 from elements.button import Button
 from elements.file_input import FileInput
 from playwright.sync_api import Page
+import allure
 
 class ImageUplodWidgetComponent(BaseComponent):
     def __init__(self, page: Page,  identifier: str):
@@ -22,7 +23,8 @@ class ImageUplodWidgetComponent(BaseComponent):
         self.remove_button = Button(page, f'{identifier}-image-upload-widget-remove-button', 'Remove button')
         self.upload_input = FileInput(page, f'{identifier}-image-upload-widget-input', 'Upload file field')
         
-        
+    
+    @allure.step('Check visible upload preview image widget')
     def check_visible(self, is_image_uploaded: bool = False):
         self.image_upload_info_icon.check_visible()
         self.image_upload_info_title.check_visible()

@@ -5,6 +5,7 @@ from elements.button import Button
 from elements.link import Link
 from playwright.sync_api import Page
 import re
+import allure
 
 class RegistrationPage(BasePage):
     def __init__(self, page: Page):
@@ -14,7 +15,8 @@ class RegistrationPage(BasePage):
         self.title = Text(page, 'authentication-ui-course-title-text', 'Registration page Title')
         self.registration_button = Button(page, 'registration-page-registration-button', 'Registration button')
         self.login_link = Link(page, 'registration-page-login-link', 'Login link')
-        
+    
+    @allure.step('Fill registration form')
     def fill_registration_form(self, email: str, 
                                username: str, 
                                password: str) -> None:
@@ -30,7 +32,8 @@ class RegistrationPage(BasePage):
     def click_login_link(self) -> None:
         self.login_link.click()
         self.check_current_url(re.compile(r'*/#/auth/login'))
-        
+    
+    @allure.step('Check title registration page') 
     def check_title(self) -> None:
         self.title.check_visible()
         self.title.check_have_text('UI Course')

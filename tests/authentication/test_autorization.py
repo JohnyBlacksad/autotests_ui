@@ -23,6 +23,9 @@ correct_users = {('test@gmail.com', 'testUser', 'password'): 'First correct user
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeature.AUTHENTICATION)
 @allure.story(AllureStory.AUTHORIZATION)
+@allure.suite(AllureFeature.AUTHENTICATION)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.sub_suite(AllureStory.AUTHORIZATION)
 class TestAutorization:
     @pytest.mark.parametrize('email, username, password', correct_users.keys(), ids=correct_users.values())
     @allure.tag(AllureTag.USER_LOGIN)

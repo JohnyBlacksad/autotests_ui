@@ -4,23 +4,25 @@ from elements.text import Text
 from elements.image import Image
 from elements.icon import Icon
 from playwright.sync_api import Page
+import allure
 
 class CourseViewComponents(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
         self.cart_menu = CourseViewMenuComponent(page)
         
-        self.img = Image(page, 'course-preview-image', 'Preview course card image')
+        self.img = Image(page, 'course-preview-image', 'Preview image')
         
         self.title = Text(page, 'course-widget-title-text', 'Title')
         self.max_score_text = Text(page, 'course-max-score-info-row-view-text', 'Max score')
         self.min_score_text = Text(page, 'course-min-score-info-row-view-text', 'Min score')
-        self.estimated_time_text = Text(page, 'course-estimated-time-info-row-view-text', 'Estomated time')
+        self.estimated_time_text = Text(page, 'course-estimated-time-info-row-view-text', 'Estimated time')
         
-        self.max_score_icon = Icon(page, 'course-max-score-info-row-view-icon', 'Max score icon')
-        self.min_score_icon = Icon(page, 'course-min-score-info-row-view-icon', 'Min score icon')
-        self.estimated_time_icon = Icon(page, 'course-estimated-time-info-row-view-icon', 'Estimated time icon')
-        
+        self.max_score_icon = Icon(page, 'course-max-score-info-row-view-icon', 'Icon')
+        self.min_score_icon = Icon(page, 'course-min-score-info-row-view-icon', 'Icon')
+        self.estimated_time_icon = Icon(page, 'course-estimated-time-info-row-view-icon', 'Icon')
+    
+    @allure.step('Check visible at index "{index}"')
     def check_visible(
                 self, 
                 index: int,

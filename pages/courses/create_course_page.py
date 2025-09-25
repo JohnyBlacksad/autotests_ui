@@ -7,6 +7,7 @@ from components.courses.create_course_form_component import CreateCourseFormComp
 from components.courses.create_course_toolbar_view_component import CreateCourseToolbarViewComponent
 from components.courses.create_course_exercises_toolbar_view_component import CreateCourseExercisesToolbarViewComponent
 from playwright.sync_api import Page
+import allure
 
 class CreateCoursePage(BasePage):
     
@@ -21,7 +22,8 @@ class CreateCoursePage(BasePage):
         self.image_upload_widget = ImageUplodWidgetComponent(page, 'create-course-preview')
         self.course_exercise_form = CreateCourseExerciseFormComponent(page)
         self.course_form = CreateCourseFormComponent(page)
-        
+    
+    @allure.step('Check visible empty exercises list')
     def check_empty_task_list(self):
         self.exercises_toolbar.check_visible()
         self.no_task_empty_view.check_visible(

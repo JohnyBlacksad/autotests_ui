@@ -5,6 +5,7 @@ from elements.text import Text
 from pages.base_page import BasePage
 from playwright.sync_api import Page
 import re
+import allure
 
 class LoginPage(BasePage):
     def __init__(self, page: Page) -> None:
@@ -16,6 +17,7 @@ class LoginPage(BasePage):
         self.registration_link = Link(page, 'login-page-registration-link', 'Registration')
         self.error_allert = Text(page, 'login-page-wrong-email-or-password-alert', 'Wrong email or password')
         
+    @allure.step('Check visible login page components')
     def check_visible(self, email: str = None, password: str = None, is_empty: bool = True):
         self.title.check_visible()
         self.title.check_have_text('UI Course')
@@ -39,6 +41,7 @@ class LoginPage(BasePage):
         self.registration_link.click()
         self.check_current_url(re.compile(r'.*/#/auth/registration'))
     
+    @allure.step('Check visible wrong email or password allert')
     def check_allert_visible(self):
         self.error_allert.check_visible()
         self.error_allert.check_have_text('Wrong email or password')
