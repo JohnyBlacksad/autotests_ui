@@ -1,14 +1,15 @@
 from pages.authentication.registration_page import RegistrationPage
-
-from playwright.sync_api import Page, Playwright
+from playwright.sync_api import Playwright
+from _pytest.fixtures import SubRequest
 import pytest
+
+from tools.playwright.pages import initialize_playwright_page
 
 
 @pytest.fixture(scope='function')
-def chromium_page(playwright: Playwright) -> Page:
-    browser = playwright.chromium.launch()
-    yield browser.new_page()
-    browser.close()
+def chromium_page(playwright: Playwright, request: SubRequest):
+    yield from initialize_playwright_page(playwright, test_name=request.node.name)
+    
 
 @pytest.fixture(scope='session')
 def initialize_browser_state(playwright: Playwright) -> None:
@@ -22,9 +23,6 @@ def initialize_browser_state(playwright: Playwright) -> None:
     context.storage_state(path='./.auth/browser-state.json')
     
 @pytest.fixture(scope='function')
-def chromium_page_with_state(initialize_browser_state: None, playwright: Playwright) -> Page:
-    browser = playwright.chromium.launch()
-    context = browser.new_context(storage_state='./.auth/browser-state.json')
-    page = context.new_page()
-    yield page
-    browser.close()
+def chromium_page_with_state(initialize_browser_state: None, playwright: Playwright, request: SubRequest):
+    yield from initialize_playwright_page(playwright, test_name=request.node.name, storage_state='./.auth/browser-state.json')
+    
