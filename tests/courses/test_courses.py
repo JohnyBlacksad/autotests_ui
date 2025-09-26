@@ -8,6 +8,8 @@ from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from tools.allure.tags import AllureTag
 from allure_commons.types import Severity
+from tools.routes import AppRoute
+
 
 @pytest.mark.course
 @pytest.mark.regression
@@ -23,7 +25,7 @@ class TestCourses:
     @allure.severity(Severity.NORMAL)
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):
         
-        courses_list_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
+        courses_list_page.visit(AppRoute.COURSES)
         courses_list_page.toolbar_view.check_visible()
         courses_list_page.check_empty_result()
         courses_list_page.navbar.check_visible('username')
@@ -45,7 +47,7 @@ class TestCourses:
                         course_task_title: str,
                         course_task_descr: str):
         
-        courses_list_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
+        courses_list_page.visit(AppRoute.COURSES)
         courses_list_page.toolbar_view.click_create_course_button()
         
         created_courses_page.toolbar.check_visible(is_form_fill=False)
@@ -87,7 +89,7 @@ class TestCourses:
     @allure.severity(Severity.NORMAL)
     def test_edit_course(self, created_courses_page: CreateCoursePage,  courses_list_page: CoursesListPage):
        
-        created_courses_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
+        created_courses_page.visit(AppRoute.COURSES_CREATE)
         created_courses_page.image_upload_widget.check_visible(is_image_uploaded=False)
         created_courses_page.course_form.check_visible()
         created_courses_page.check_empty_task_list()

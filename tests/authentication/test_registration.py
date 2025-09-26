@@ -7,6 +7,9 @@ from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from tools.allure.tags import AllureTag
 from allure_commons.types import Severity
+from tools.routes import AppRoute
+
+
 
 @pytest.mark.regression
 @allure.tag(AllureTag.REGRESSION, AllureTag.REGISTRATION)
@@ -27,7 +30,7 @@ class TestRegistration:
                                     username: str, 
                                     password: str) -> None:
         
-        registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+        registration_page.visit(AppRoute.REGISTRATION)
         registration_page.check_title()
         
         registration_page.fill_registration_form(email=email, 
