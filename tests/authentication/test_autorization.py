@@ -6,6 +6,7 @@ from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from tools.allure.tags import AllureTag
 from allure_commons.types import Severity
+from tools.routes import AppRoute
 import pytest
 import allure
 
@@ -36,7 +37,7 @@ class TestAutorization:
                                  login_page: LoginPage, 
                                  email: str, username: str, password:str):
         
-        registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+        registration_page.visit(AppRoute.REGISTRATION)
         registration_page.check_title()
         registration_page.fill_registration_form(email=email, username=username, password=password)
         registration_page.click_reg_button()
@@ -66,7 +67,7 @@ class TestAutorization:
                                                email: str, 
                                                password: str):
     
-        login_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login')
+        login_page.visit(AppRoute.LOGIN)
         login_page.login_form.check_visible()
         login_page.login_form.fill_form(email=email, password=password)
         login_page.login_form.check_visible(email=email, password=password, is_empty=False)
@@ -78,7 +79,7 @@ class TestAutorization:
     @allure.severity(Severity.NORMAL)
     def test_navigate_from_authorization_to_registration(self, login_page: LoginPage, 
                                                          registration_page: RegistrationPage):
-        login_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login')
+        login_page.visit(AppRoute.LOGIN)
         login_page.check_visible()
         login_page.click_registration_link()
         registration_page.check_title()
