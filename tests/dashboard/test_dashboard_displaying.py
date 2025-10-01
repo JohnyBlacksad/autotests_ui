@@ -20,7 +20,7 @@ from tools.routes import AppRoute
 class TestDashboard:
     @allure.title('Check displaying of dashboard page')
     @allure.severity(Severity.NORMAL)
-    def test_dashboard_displaying(self, dashboard_page_with_state: DashboardPage, ):
+    def test_dashboard_displaying(self, dashboard_page_with_state: DashboardPage):
         dashboard_page_with_state.visit(AppRoute.DASHBOARD)
         dashboard_page_with_state.navbar.check_visible('username')
         dashboard_page_with_state.toolbar.check_visible()
