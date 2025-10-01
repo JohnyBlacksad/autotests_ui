@@ -47,6 +47,7 @@ class Settings(BaseSettings):
         videos_dir.mkdir(exist_ok=True)
         tracing_dir.mkdir(exist_ok=True)
         allure_results_dir.mkdir(exist_ok=True)
+        browser_state_file.parent.mkdir(parents=True, exist_ok=True)
         browser_state_file.touch(exist_ok=True)
         
         return Settings(

@@ -69,3 +69,4 @@ allure-reports
 *.json
 videos
 tracing
+.auth
