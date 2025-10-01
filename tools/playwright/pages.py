@@ -3,8 +3,6 @@ from allure_commons.types import AttachmentType
 from config import settings, Browser
 import allure
 
-from tools.playwright.mocks import mock_statick_resources
-
 
 
 
@@ -21,7 +19,6 @@ def initialize_playwright_page(playwright: Playwright,
         record_video_dir=settings.videos_dir)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
     page = context.new_page()
-    mock_statick_resources(page)
     
     yield page
     

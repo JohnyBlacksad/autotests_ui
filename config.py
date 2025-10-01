@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import EmailStr, FilePath, HttpUrl, DirectoryPath, BaseModel
 from enum import Enum
+from typing import Self
 
 
 class Browser(str, Enum):
@@ -8,12 +9,16 @@ class Browser(str, Enum):
     FIREFOX = 'firefox'
     CHROMIUM = 'chromium'
 
-class TestUser(BaseModel):
+class TestUser(BaseSettings):
+    model_config = SettingsConfigDict(env_prefix="TEST_USER")
+    
     email: EmailStr
     username: str
     password: str
     
-class TestData(BaseModel):
+class TestData(BaseSettings):
+    model_config = SettingsConfigDict(env_prefix='TEST_DATA')
+    
     image_png_file: FilePath
     
 
@@ -38,16 +43,15 @@ class Settings(BaseSettings):
         return f'{self.app_url}/'
     
     @classmethod
-    def initialize(cls):
+    def initialize(cls) -> Self:
         videos_dir = DirectoryPath("./videos")
         tracing_dir = DirectoryPath("./tracing")
         allure_results_dir = DirectoryPath("./allure-results")
-        browser_state_file = FilePath("./.auth/browser-state.json")
+        browser_state_file = FilePath("browser-state.json")
         
         videos_dir.mkdir(exist_ok=True)
         tracing_dir.mkdir(exist_ok=True)
         allure_results_dir.mkdir(exist_ok=True)
-        browser_state_file.parent.mkdir(parents=True, exist_ok=True)
         browser_state_file.touch(exist_ok=True)
         
         return Settings(
