@@ -1,0 +1,52 @@
+INFO     BASE PAGE:base_page.py:16 Opening the URL: "AppRoute.LOGIN"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "authentication-ui-course-title-text" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that text "Title" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "authentication-ui-course-title-text" at index "0"
+INFO     BASE ELEMENT:base_element.py:42 Checking that text "Title" has text "UI Course"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-page-registration-link" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that link "Registration" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-page-registration-link" at index "0"
+INFO     BASE ELEMENT:base_element.py:42 Checking that link "Registration" has text "Registration"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-page-login-button" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that button "Login" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-page-login-button" at index "0"
+INFO     BASE ELEMENT:base_element.py:42 Checking that button "Login" has text "Login"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-form-email-input" at index "0"
+INFO     LABEL:label.py:21 Checking label "Email placeholder" have a text "Email"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-form-email-input" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that input "Email field" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-form-password-input" at index "0"
+INFO     LABEL:label.py:21 Checking label "Password placeholder" have a text "Password"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-form-password-input" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that input "Password field" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-form-email-input" at index "0"
+INFO     INPUT:input.py:30 Checking input "Email field" have a value ""
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-form-password-input" at index "0"
+INFO     INPUT:input.py:30 Checking input "Password field" have a value ""
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-page-login-button" at index "0"
+INFO     BUTTON:button.py:27 Checking that button "Login" is disabled
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "login-page-registration-link" at index "0"
+INFO     BASE ELEMENT:base_element.py:28 Clicking link "Registration"
+INFO     BASE PAGE:base_page.py:29 Checking that current url matches pattern: ".*/#/auth/registration"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "authentication-ui-course-title-text" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that text "Registration page Title" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "authentication-ui-course-title-text" at index "0"
+INFO     BASE ELEMENT:base_element.py:42 Checking that text "Registration page Title" has text "UI Course"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-email-input" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that input "Email field" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-email-input" at index "0"
+INFO     LABEL:label.py:21 Checking label "Email placeholder" have a text "Email"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-username-input" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that input "Username field" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-username-input" at index "0"
+INFO     LABEL:label.py:21 Checking label "Username placeholder" have a text "Username"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-password-input" at index "0"
+INFO     BASE ELEMENT:base_element.py:35 Checking that input "Password field" is visible
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-password-input" at index "0"
+INFO     LABEL:label.py:21 Checking label "Password placeholder" have a text "Password"
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-email-input" at index "0"
+INFO     INPUT:input.py:30 Checking input "Email field" have a value ""
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-username-input" at index "0"
+INFO     INPUT:input.py:30 Checking input "Username field" have a value ""
+INFO     BASE ELEMENT:base_element.py:21 Getting locator with "data-test-id" = "registration-form-password-input" at index "0"
+INFO     INPUT:input.py:30 Checking input "Password field" have a value ""
